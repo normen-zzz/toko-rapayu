@@ -532,21 +532,29 @@ class Administrator extends CI_Controller
             $this->load->view('templates/footer_admin');
         } else {
             $data = array();
+            $res = $this->Categories_model->insertSubCategory($id_categories);
 
-            if ($this->Categories_model->insertCategory($id_categories)) {
+            if ($res == TRUE) {
                 $this->session->set_flashdata('upload', "<script>
                     swal({
                     text: 'SubKategori berhasil ditambahkan',
                     icon: 'success'
                     });
                     </script>");
-                redirect(base_url() . 'administrator/subcategories/' . $id_categories);
+                redirect(base_url() . 'administrator/categories/add-subcategories/' . $id_categories);
             } else {
                 $this->session->set_flashdata('failed', "<div class='alert alert-danger' role='alert'>
                 Gagal menambah sub kategori.
               </div>");
-                redirect(base_url() . 'administrator/subcategories/' . $id_categories);
+                redirect(base_url() . 'administrator/categories/subcategories/' . $id_categories);
             }
+        }
+    }
+    public function getSubCategories()
+    {
+        if ($this->input->post('categories')) {
+            echo $this->Categories_model->getSubCategories($this->input->post('id_categories'))->result_array();
+            // var_dump($this->Categories_model->getSubCategories(2)->result_array());
         }
     }
 
@@ -623,6 +631,7 @@ class Administrator extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Tambah Produk - Admin Panel';
             $data['categories'] = $this->Categories_model->getCategories();
+            $data['subcategories'] = $this->Categories_model->getSubCategories(2);
             $this->load->view('templates/header_admin', $data);
             $this->load->view('administrator/add_product', $data);
             $this->load->view('templates/footer_admin');

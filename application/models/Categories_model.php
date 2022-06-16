@@ -36,7 +36,7 @@ class Categories_model extends CI_Model
 
     public function getSubCategories($id_categories)
     {
-        return $this->db->get_where('sub-categories', ['id_categories' => $id_categories])->row_array();
+        return $this->db->get_where('sub-categories', ['id_categories' => $id_categories]);
     }
 
     public function uploadIcon()
@@ -70,6 +70,8 @@ class Categories_model extends CI_Model
         $this->db->insert('categories', $data);
     }
 
+
+
     public function insertSubCategory($id_categories)
     {
         $name = $this->input->post('name');
@@ -81,6 +83,7 @@ class Categories_model extends CI_Model
             "slug" => $slugFix
         ];
         $this->db->insert('sub-categories', $data);
+        return TRUE;
     }
     public function updateCategory($icon, $id)
     {

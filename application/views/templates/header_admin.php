@@ -70,7 +70,7 @@ $setting = $this->db->get('settings')->row_array();
       width: 50%;
     }
 
-    body{
+    body {
       font-family: 'Poppins';
     }
   </style>
@@ -92,7 +92,7 @@ $setting = $this->db->get('settings')->row_array();
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url(); ?>administrator">
         <div class="sidebar-brand-icon rotate">

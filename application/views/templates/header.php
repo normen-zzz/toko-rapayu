@@ -35,14 +35,17 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      
+
     <link rel="stylesheet" href="<?= base_url(); ?>assets/select2-4.0.6-rc.1/dist/css/select2.min.css">
 
     <link rel="stylesheet" href="<?= base_url(); ?>assets/lightbox2-2.11.1/dist/css/lightbox.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
     <title><?= $title ?></title>
   </head>
-  <body>
+  <body style="font-family: 'Poppins';">
 
   <div class="loading-animation-screen">
     <div class="overlay-screen"></div>

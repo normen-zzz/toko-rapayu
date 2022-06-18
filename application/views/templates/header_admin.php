@@ -15,7 +15,7 @@ $setting = $this->db->get('settings')->row_array();
 
   <!-- Custom fonts for this template-->
   <link href="<?= base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
   <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/logo/<?= $setting['favicon']; ?>" type="image/x-icon">
 
@@ -69,6 +69,10 @@ $setting = $this->db->get('settings')->row_array();
     .description-product-detail img {
       width: 50%;
     }
+
+    body{
+      font-family: 'Poppins';
+    }
   </style>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -88,7 +92,7 @@ $setting = $this->db->get('settings')->row_array();
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url(); ?>administrator">
         <div class="sidebar-brand-icon rotate">
@@ -126,12 +130,6 @@ $setting = $this->db->get('settings')->row_array();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/email">
-          <i class="fas fa-fw fa-envelope"></i>
-          <span>Kirim Email</span></a>
-      </li>
-
-      <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>administrator/categories">
           <i class="fas fa-fw fa-tag"></i>
           <span>Kategori</span></a>
@@ -154,13 +152,6 @@ $setting = $this->db->get('settings')->row_array();
           <i class="fas fa-fw fa-comments"></i>
           <span>Testimoni</span></a>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/pages">
-          <i class="fas fa-fw fa-file"></i>
-          <span>Halaman</span></a>
-      </li>
-
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>administrator/settings">
           <i class="fas fa-fw fa-cog"></i>

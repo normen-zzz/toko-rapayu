@@ -39,6 +39,16 @@ class Categories_model extends CI_Model
         return $this->db->get_where('sub-categories', ['id_categories' => $id_categories]);
     }
 
+    public function getSubCategoriesAjax($id_categories)
+    {
+        $getSub = $this->getSubCategories($id_categories)->result_array();
+        $output = '';
+        foreach ($getSub as $getSub) {
+            $output .= '<option value="' . $getSub['id'] . '">' . $getSub['name'] . '</option>';
+        }
+        return $output;
+    }
+
     public function uploadIcon()
     {
         $config['upload_path'] = './assets/images/icon/';

@@ -49,7 +49,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="cat">Sub-Kategori</label>
-							<select class="form-control subcat" id="subcat" name="subcategory">
+							<select class="form-control" id="subcat" name="subcategory">
 								<option selected disabled value="">Choose...</option>
 								<option>...</option>
 							</select>

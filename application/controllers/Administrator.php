@@ -552,10 +552,10 @@ class Administrator extends CI_Controller
     }
     public function getSubCategories()
     {
-        if ($this->input->post('categories')) {
-            echo $this->Categories_model->getSubCategories($this->input->post('id_categories'))->result_array();
-            // var_dump($this->Categories_model->getSubCategories(2)->result_array());
+        if ($this->input->post('id_categories')) {
+            echo $this->Categories_model->getSubCategoriesAjax($this->input->post('id_categories'));
         }
+        // var_dump($this->Categories_model->getSubCategoriesAjax(2));
     }
 
     // products

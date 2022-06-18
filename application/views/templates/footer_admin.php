@@ -66,7 +66,7 @@
 
     if (id_categories != '') {
       $.ajax({
-        url: '<?= base_url(); ?>Administrator/getSubCategory',
+        url: '<?= base_url(); ?>Administrator/getSubCategories',
         method: 'POST',
         data: {
           id_categories: id_categories,

@@ -11,7 +11,7 @@ class Administrator extends CI_Controller
         $x['judul'] = "Silahkan Masuk..!";
         $this->load->helper('cookie');
         if ($this->session->userdata('admin')) {
-            redirect(base_url() . 'welcome');
+            redirect(base_url() . 'admin/Penjualan');
         } else {
             $cookie = get_cookie('djehbicd');
             if ($cookie != NULL) {
@@ -63,7 +63,7 @@ class Administrator extends CI_Controller
 
     function berhasillogin()
     {
-        redirect('Welcome');
+        redirect('admin/Penjualan');
     }
     function gagallogin()
     {

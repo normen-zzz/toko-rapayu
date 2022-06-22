@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
 
     <title>Welcome To Point of Sale Apps</title>
 
@@ -25,7 +23,7 @@
 <body>
 
     <!-- Navigation -->
-   <?php 
+   <?php
         $this->load->view('admin/menu');
    ?>
 
@@ -56,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                     $no=0;
                     foreach ($data->result_array() as $a):
                         $no++;
@@ -98,7 +96,7 @@
                             <input name="nama" class="form-control" type="text" placeholder="Nama Suplier..." style="width:280px;" required>
                         </div>
                     </div>
-                        
+
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Alamat</label>
                         <div class="col-xs-9">
@@ -111,7 +109,7 @@
                         <div class="col-xs-9">
                             <input name="notelp" class="form-control" type="text" placeholder="No Telp/HP..." style="width:280px;" required>
                         </div>
-                    </div>   
+                    </div>
 
                 </div>
 
@@ -149,7 +147,7 @@
                             <input name="nama" class="form-control" type="text" placeholder="Nama Suplier..." value="<?php echo $nm;?>" style="width:280px;" required>
                         </div>
                     </div>
-                        
+
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Alamat</label>
                         <div class="col-xs-9">
@@ -162,7 +160,7 @@
                         <div class="col-xs-9">
                             <input name="notelp" class="form-control" type="text" placeholder="No Telp/HP..." value="<?php echo $notelp;?>" style="width:280px;" required>
                         </div>
-                    </div>   
+                    </div>
 
                 </div>
                         <div class="modal-footer">
@@ -237,7 +235,7 @@
             $('#mydata').DataTable();
         } );
     </script>
-    
+
 </body>
 
 </html>

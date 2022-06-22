@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
 
     <title>Welcome To Point of Sale Apps</title>
 
@@ -25,7 +23,7 @@
 <body>
 
     <!-- Navigation -->
-   <?php 
+   <?php
         $this->load->view('admin/menu');
    ?>
 
@@ -54,7 +52,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                     $no=0;
                     foreach ($data->result_array() as $a):
                         $no++;
@@ -92,7 +90,7 @@
                             <input name="kategori" class="form-control" type="text" placeholder="Input Nama Kategori..." style="width:280px;" required>
                         </div>
                     </div>
-                           
+
 
                 </div>
 
@@ -180,7 +178,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                
+
             </div>
             <!-- /.row -->
         </footer>
@@ -200,7 +198,7 @@
             $('#mydata').DataTable();
         } );
     </script>
-    
+
 </body>
 
 </html>

@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
 
     <title>Welcome To Point of Sale Apps</title>
 
@@ -27,7 +25,7 @@
 <body>
 
     <!-- Navigation -->
-   <?php 
+   <?php
         $this->load->view('admin/menu');
    ?>
 
@@ -55,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                
+
                     <tr>
                         <td style="text-align:center;vertical-align:middle">1</td>
                         <td style="vertical-align:middle;">Laporan Data Barang</td>
@@ -111,7 +109,7 @@
                             <a class="btn btn-sm btn-default" href="#lap_laba_rugi" data-toggle="modal"><span class="fa fa-print"></span> Print</a>
                         </td>
                     </tr>
-              
+
                 </tbody>
             </table>
             </div>
@@ -139,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                           
+
 
                 </div>
 
@@ -175,7 +173,7 @@
                                 </select>
                         </div>
                     </div>
-                           
+
 
                 </div>
 
@@ -211,7 +209,7 @@
                                 </select>
                         </div>
                     </div>
-                           
+
 
                 </div>
 
@@ -248,7 +246,7 @@
                                 </select>
                         </div>
                     </div>
-                           
+
 
                 </div>
 
@@ -260,7 +258,7 @@
             </div>
             </div>
         </div>
-        
+
 
         <!--END MODAL-->
 
@@ -293,7 +291,7 @@
                 $('#datetimepicker').datetimepicker({
                     format: 'DD MMMM YYYY HH:mm',
                 });
-                
+
                 $('#datepicker').datetimepicker({
                     format: 'YYYY-MM-DD',
                 });
@@ -311,7 +309,7 @@
             $('#mydata').DataTable();
         } );
     </script>
-    
+
 </body>
 
 </html>

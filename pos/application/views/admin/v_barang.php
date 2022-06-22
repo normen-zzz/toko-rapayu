@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
 
     <title>Management data barang</title>
 
@@ -25,7 +23,7 @@
 <body>
 
     <!-- Navigation -->
-   <?php 
+   <?php
         $this->load->view('admin/menu');
    ?>
 
@@ -62,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                     $no=0;
                     foreach ($data->result_array() as $a):
                         $no++;
@@ -134,12 +132,12 @@
                                     ?>
                                         <option value="<?php echo $id_kat;?>"><?php echo $nm_kat;?></option>
                                 <?php }?>
-                                    
+
                                 </select>
                             </div>
                         </div>
 
-                 
+
 
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Satuan</label>
@@ -209,7 +207,7 @@
                             <input name="min_stok" class="form-control" type="number" placeholder="Minimal Stok..." style="width:335px;">
                         </div>
                     </div>
-                           
+
 
                 </div>
 
@@ -273,7 +271,7 @@
                                         echo "<option value='$id_kat'>$nm_kat</option>";
                                 }
                                 ?>
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -1119,7 +1117,7 @@
             });
         });
     </script>
-    
+
 </body>
 
 </html>

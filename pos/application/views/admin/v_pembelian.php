@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
 
     <title>Welcome To Point of Sale Apps</title>
 
@@ -26,7 +24,7 @@
 <body>
 
     <!-- Navigation -->
-   <?php 
+   <?php
         $this->load->view('admin/menu');
    ?>
 
@@ -39,7 +37,7 @@
             <center><?php echo $this->session->flashdata('msg');?></center>
                 <h1 class="page-header">Pembelian
                     <small>Barang</small>
-                    
+
                 </h1>
             </div>
         </div>
@@ -86,7 +84,7 @@
                     <th>Kode Barang</th>
                 </tr>
                 <tr>
-                    <th><input type="text" name="kode_brg" id="kode_brg" class="form-control input-sm"></th>                     
+                    <th><input type="text" name="kode_brg" id="kode_brg" class="form-control input-sm"></th>
                 </tr>
                     <div id="detail_barang" style="position:absolute;">
                     </div>
@@ -133,7 +131,7 @@
             </div>
         </div>
         <!-- /.row -->
-        
+
 
         <hr>
 
@@ -141,7 +139,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                   
+
                 </div>
             </div>
             <!-- /.row -->
@@ -166,7 +164,7 @@
                 $('#datetimepicker').datetimepicker({
                     format: 'DD MMMM YYYY HH:mm',
                 });
-                
+
                 $('#datepicker').datetimepicker({
                     format: 'YYYY-MM-DD',
                 });
@@ -209,7 +207,7 @@
                $('#detail_barang').html(msg);
                }
             });
-            }); 
+            });
 
             $("#kode_brg").keypress(function(e){
                 if(e.which==13){
@@ -218,7 +216,7 @@
             });
         });
     </script>
-    
+
 </body>
 
 </html>

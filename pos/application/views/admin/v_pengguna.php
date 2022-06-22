@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
 
     <title>Welcome To Point of Sale Apps</title>
 
@@ -25,7 +23,7 @@
 <body>
 
     <!-- Navigation -->
-   <?php 
+   <?php
         $this->load->view('admin/menu');
    ?>
 
@@ -59,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                     $no=0;
                     foreach ($data->result_array() as $a):
                         $no++;
@@ -119,13 +117,13 @@
                             <input name="password" class="form-control" type="password" placeholder="Input Password..." style="width:280px;" required>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Ulangi Password</label>
                         <div class="col-xs-9">
                             <input name="password2" class="form-control" type="password" placeholder="Ulangi Password..." style="width:280px;" required>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Level</label>
@@ -135,7 +133,7 @@
                                 <option value="2">Kasir</option>
                             </select>
                         </div>
-                    </div>   
+                    </div>
 
                 </div>
 
@@ -189,13 +187,13 @@
                             <input name="password" class="form-control" type="password" placeholder="Input Password..." style="width:280px;">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Ulangi Password</label>
                         <div class="col-xs-9">
                             <input name="password2" class="form-control" type="password" placeholder="Ulangi Password..." style="width:280px;">
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Level</label>
@@ -267,7 +265,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                  
+
                 </div>
             </div>
             <!-- /.row -->
@@ -288,7 +286,7 @@
             $('#mydata').DataTable();
         } );
     </script>
-    
+
 </body>
 
 </html>

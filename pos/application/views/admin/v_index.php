@@ -6,6 +6,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
       <title>Selamat To Point of Sale Apps</title>
 
       <!-- Bootstrap Core CSS -->
@@ -54,7 +55,7 @@
                   <!-- Projects Row -->
                   <div class="row">
 
-                        <div class="col-md-3 portfolio-item">
+                        <div class="col-md-6 portfolio-item">
                               <div class="menu-item blue" style="height:150px;">
                                     <a href="<?php echo base_url() . 'admin/penjualan' ?>" data-toggle="modal">
                                           <i class="fa fa-shopping-bag"></i>
@@ -62,60 +63,11 @@
                                     </a>
                               </div>
                         </div>
-                        <div class="col-md-3 portfolio-item">
+                        <div class="col-md-6 portfolio-item">
                               <div class="menu-item green" style="height:150px;">
-                                    <a href="<?php echo base_url() . 'admin/penjualan_grosir' ?>" data-toggle="modal">
+                                    <a href="<?php echo base_url() . 'admin/retur' ?>" data-toggle="modal">
                                           <i class="fa fa-cubes"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Penjualan Grosir</p>
-                                    </a>
-                              </div>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                              <div class="menu-item light-orange" style="height:150px;">
-                                    <a href="<?php echo base_url() . 'admin/suplier' ?>" data-toggle="modal">
-                                          <i class="fa fa-truck"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Suplier</p>
-                                    </a>
-                              </div>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                              <div class="menu-item color" style="height:150px;">
-                                    <a href="<?php echo base_url() . 'admin/kategori' ?>" data-toggle="modal">
-                                          <i class="fa fa-sitemap"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Kategori</p>
-                                    </a>
-                              </div>
-                        </div>
-
-                        <div class="col-md-3 portfolio-item">
-                              <div class="menu-item blue" style="height:150px;">
-                                    <a href="#" data-toggle="modal">
-                                          <i class="fa fa-shopping-cart"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Penjualan Eceran</p>
-                                    </a>
-                              </div>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                              <div class="menu-item green" style="height:150px;">
-                                    <a href="#" data-toggle="modal">
-                                          <i class="fa fa-users"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Penjualan Grosir</p>
-                                    </a>
-                              </div>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                              <div class="menu-item light-orange" style="height:150px;">
-                                    <a href="#" data-toggle="modal">
-                                          <i class="fa fa-truck"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Suplier</p>
-                                    </a>
-                              </div>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                              <div class="menu-item color" style="height:150px;">
-                                    <a href="#" data-toggle="modal">
-                                          <i class="fa fa-sitemap"></i>
-                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Kategori</p>
+                                          <p style="text-align:left;font-size:14px;padding-left:5px;">Retur</p>
                                     </a>
                               </div>
                         </div>

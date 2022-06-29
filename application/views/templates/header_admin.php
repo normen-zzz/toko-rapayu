@@ -121,12 +121,13 @@ $setting = $this->db->get('settings')->row_array();
       </li>
 
       <?php $this->db->where('status', 0);
+      $this->db->where('type', 'online');
       $this->db->or_where('status', 1);
       $orders = $this->db->get('invoice'); ?>
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>administrator/orders">
           <i class="fas fa-fw fa-shopping-cart"></i>
-          <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a>
+          <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new online</small></a>
       </li>
 
       <li class="nav-item">

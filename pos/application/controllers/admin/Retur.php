@@ -33,6 +33,7 @@ class Retur extends CI_Controller
 		$harjul = str_replace(",", "", $this->input->post('harjul'));
 		$qty = $this->input->post('qty');
 		$keterangan = $this->input->post('keterangan');
+		$product = $this->db->get_where('products', array('id' => $kobar))->row_array();
 		// $this->m_penjualan->simpan_retur($kobar, $nabar, $harjul, $qty, $keterangan);
 		$data = array(
 			'id_product' => $kobar,
@@ -43,6 +44,7 @@ class Retur extends CI_Controller
 			'ket' => $keterangan
 		);
 		$this->db->insert('return', $data);
+		// $this->db->update('products', array('stock' => $product['stock'] + $qty), array('id' => $kobar));
 		redirect('admin/retur');
 	}
 

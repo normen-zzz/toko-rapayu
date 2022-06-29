@@ -22,8 +22,15 @@ class M_penjualan extends CI_Model
 	{
 
 		// $hsl = $this->db->query("SELECT retur_id,DATE_FORMAT(retur_tanggal,'%d/%m/%Y') AS retur_tanggal,retur_barang_id,retur_barang_nama,retur_barang_satuan,retur_harjul,retur_qty,(retur_harjul*retur_qty) AS retur_subtotal,retur_keterangan FROM tbl_retur ORDER BY retur_id DESC");
-
 		return $this->db->get('return');
+	}
+	function tampil_penjualan()
+	{
+		return $this->db->get_where('invoice', array('type' => 'offline'));
+	}
+	function tampil_detail_penjualan($kode)
+	{
+		return $this->db->get_where('transaction', array('id_invoice' => $kode));
 	}
 
 	function simpan_retur($kobar, $nabar, $satuan, $harjul, $qty, $keterangan)
@@ -82,6 +89,18 @@ class M_penjualan extends CI_Model
 		}
 		return true;
 	}
+	public function kurang_stok()
+	{
+		foreach ($this->cart->contents() as $item) {
+			$product = $this->db->get_where('products', array('id' => $item['id']))->row_array();
+			$data = array(
+				'stock' 			=>	$product['stock'] - $item['qty'],
+			);
+			$this->db->where('id', $item['id']);
+			$this->db->update('products', $data);
+			return TRUE;
+		}
+	}
 	function get_nofak()
 	{
 		$kd = substr(rand(), 0, 5) . substr(time(), 7);;
@@ -122,14 +141,14 @@ class M_penjualan extends CI_Model
 	function invoice()
 	{
 		$nofak = $this->session->userdata('nofak');
-		$this->db->where('invoice_code', 21055952);
+		$this->db->where('invoice_code', $nofak);
 
 		return $this->db->get('invoice');
 	}
 	function transaction()
 	{
 		$nofak = $this->session->userdata('nofak');
-		$this->db->where('id_invoice', 21055952);
+		$this->db->where('id_invoice', $nofak);
 
 		return $this->db->get('transaction');
 	}

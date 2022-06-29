@@ -18,6 +18,9 @@
                  <li>
                      <a href="<?php echo base_url() . 'admin/penjualan' ?>"><span class="fa fa-shopping-cart"></span> Transaksi</a>
                  </li>
+                 <li>
+                     <a href="<?php echo base_url() . 'admin/penjualan/history' ?>"><span class="fa fa-shopping-cart"></span> History Transaksi</a>
+                 </li>
                  <!--ending dropdown-->
                  <li>
                      <a href="<?php echo base_url() . 'admin/retur' ?>"><span class="fa fa-refresh"></span> Retur</a>

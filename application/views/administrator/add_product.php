@@ -18,6 +18,7 @@
 						<div class="form-group">
 							<label for="title">Judul</label>
 							<input type="text" class="form-control" id="title" name="title" placeholder="Isikan Judul Produk" autocomplete="off" required value="<?php echo set_value('title'); ?>" />
+							<?= form_error('title', '<small class="text-danger">', '</small>'); ?>
 						</div>
 					</div>
 					<div class="col-md-6">

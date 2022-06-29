@@ -17,6 +17,13 @@ class Order_model extends CI_Model
         return $this->db->get('invoice', $number, $offset);
     }
 
+    public function getOrdersOffline($number, $offset)
+    {
+        $this->db->where('type', 'offline');
+        $this->db->order_by('id', 'desc');
+        return $this->db->get('invoice', $number, $offset);
+    }
+
     public function getOrderByInvoice($id)
     {
         return $this->db->get_where('transaction', ['id_invoice' => $id]);

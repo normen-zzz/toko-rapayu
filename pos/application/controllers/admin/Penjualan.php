@@ -18,6 +18,17 @@ class Penjualan extends CI_Controller
 		$data['data'] = $this->m_barang->tampil_barang();
 		$this->load->view('admin/v_penjualan', $data);
 	}
+
+	public function history()
+	{
+		$data['history'] = $this->m_penjualan->tampil_penjualan();
+		$this->load->view('admin/v_history_penjualan', $data);
+	}
+	public function detail_history($kode)
+	{
+		$data['history'] = $this->m_penjualan->tampil_detail_penjualan($kode);
+		$this->load->view('admin/v_detail_history_penjualan', $data);
+	}
 	function get_barang()
 	{
 
@@ -87,9 +98,11 @@ class Penjualan extends CI_Controller
 				$this->session->set_userdata('nofak', $nofak);
 				$order_proses = $this->m_penjualan->simpan_penjualan($nofak, $diskon, $total, $total_all, $jml_uang, $kembalian);
 				if ($order_proses) {
+					if ($this->m_penjualan->kurang_stok()) {
+						$this->cart->destroy();
 
-					$this->cart->destroy();
-					$this->load->view('admin/alert/alert_sukses');
+						$this->load->view('admin/alert/alert_sukses');
+					}
 				} else {
 
 					redirect('admin/penjualan');
@@ -109,6 +122,6 @@ class Penjualan extends CI_Controller
 		$x['transaction'] = $this->m_penjualan->transaction();
 
 		$this->load->view('admin/laporan/v_faktur', $x);
-		//$this->session->unset_userdata('nofak');
+		$this->session->unset_userdata('nofak');
 	}
 }

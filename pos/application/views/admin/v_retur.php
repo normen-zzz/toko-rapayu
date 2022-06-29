@@ -36,7 +36,7 @@
             <div class="col-lg-12">
                 <center><?php echo $this->session->flashdata('msg'); ?></center>
                 <h1 class="page-header">Retur
-                    <small>Penjualan (Grosir)</small>
+                    <small>Penjualan</small>
                     <a href="#" data-toggle="modal" data-target="#largeModal" class="pull-right"><small>Bantuan?</small></a>
                 </h1>
             </div>
@@ -200,7 +200,11 @@
         </script>
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#mydata2').DataTable();
+                $('#mydata2').DataTable({
+                    order: [
+                        [0, 'desc']
+                    ],
+                });
             });
         </script>
         <script type="text/javascript">

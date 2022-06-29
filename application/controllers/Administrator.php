@@ -143,6 +143,7 @@ class Administrator extends CI_Controller
         $from = $this->uri->segment(3);
         $this->pagination->initialize($config);
         $data['orders'] = $this->Order_model->getOrders($config['per_page'], $from);
+        $data['offline'] = $this->Order_model->getOrdersOffline($config['per_page'], $from);
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/orders', $data);
         $this->load->view('templates/footer_admin');
@@ -627,7 +628,7 @@ class Administrator extends CI_Controller
 
     public function add_product()
     {
-        $this->form_validation->set_rules('title', 'title', 'required', ['required' => 'Judul wajib diisi']);
+        $this->form_validation->set_rules('title', 'title', 'required|alpha_numeric', ['required' => 'Judul wajib diisi', 'alpha_numeric' => 'Tidak boleh ada simbol']);
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Tambah Produk - Admin Panel';
             $data['categories'] = $this->Categories_model->getCategories();

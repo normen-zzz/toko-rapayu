@@ -7,7 +7,7 @@
 </head>
 
 <body onload="window.print()">
-    <h1 align="center">Toko Test</h1>
+    <h1 style="margin-top: 20px;" align="center">Ifani Shop</h1>
 
     <div id="laporan">
         <table align="center" style="width:700px; border-bottom:3px double;border-top:none;border-right:none;border-left:none;margin-top:5px;margin-bottom:20px;">
@@ -130,6 +130,7 @@
             </tr>
         </table>
     </div>
+
 </body>
 
 </html>

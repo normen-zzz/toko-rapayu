@@ -12,28 +12,32 @@ class Home extends CI_Controller
 		$this->load->model('Products_model');
 		$this->load->model('Settings_model');
 		$this->load->model('Promo_model');
+		$this->load->model('Order_model');
 		$this->load->helper('cookie');
 	}
 
 	public function index()
 	{
 		$data['title'] =  $this->Settings_model->general()["slogan"];
+		$data['banner'] = $this->Settings_model->getBanner();
 		$data['css'] = 'style';
 		$data['responsive'] = 'style-responsive';
 		$data['setting'] = $this->Settings_model->getSetting();
 		$data['categories'] = $this->Categories_model->getCategories();
-		$data['categoriesLimit'] = $this->Categories_model->getCategoriesLimit();
+		$data['categoriesLimit'] = $this->Categories_model->getCategoriesLimit()->result_array();
 		$data['promo'] = $this->Promo_model->getPromo();
 		$data['getPromo'] = $this->Promo_model->getPromoLimit();
 		$data['recent'] = $this->Products_model->getProductsLimit();
 		$data['best'] = $this->Products_model->getBestProductsLimit();
+		$data['cart'] = $this->Order_model->getCartUser();
 		$data['allProducts'] = $this->db->get('products');
 		$this->verify_web_authentication();
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/navbar');
-		$this->load->view('templates/banner');
-		$this->load->view('index', $data);
-		$this->load->view('templates/footer');
+		// $this->load->view('templates/header', $data);
+		// $this->load->view('templates/navbar');
+		// $this->load->view('templates/banner');
+		$this->load->view('index2', $data);
+		// $this->load->view('templates/footer');
+
 	}
 
 	public function notfound()

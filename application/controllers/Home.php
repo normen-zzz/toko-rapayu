@@ -18,6 +18,7 @@ class Home extends CI_Controller
 
 	public function index()
 	{
+		$data['user'] =  $this->db->get_where('user', array('id' => $this->session->userdata('id')))->row_array();
 		$data['title'] =  $this->Settings_model->general()["slogan"];
 		$data['banner'] = $this->Settings_model->getBanner();
 		$data['css'] = 'style';
@@ -163,7 +164,7 @@ class Home extends CI_Controller
 		$sess = ['login', 'id'];
 		$this->session->unset_userdata($sess);
 		delete_cookie('e382jxndj');
-		redirect(base_url() . 'login');
+		redirect(base_url());
 	}
 
 	public function verify_web_authentication()

@@ -12,6 +12,16 @@ class Products_model extends CI_Model
         return $this->db->get("products", $number, $offset);
     }
 
+    public function getRestock($number, $offset)
+    {
+        return $this->db->get("restock", $number, $offset);
+    }
+
+    public function getDetailRestock($where, $number, $offset)
+    {
+        return $this->db->get_where("detail_restock", array('no_faktur' => $where), $number, $offset);
+    }
+
     public function getSearchProducts($key, $number, $offset)
     {
         $this->db->select("products.id AS productsId, products.title AS productsTitle, products.price AS productsPrice, products.stock AS productsStock, products.date_submit AS productsDate, products.img AS productsImg, products.publish AS productsPublish, categories.name AS categoriesName");
@@ -21,6 +31,15 @@ class Products_model extends CI_Model
         $this->db->or_like('categories.name', $key);
         $this->db->order_by("products.id", "desc");
         return $this->db->get("products", $number, $offset);
+    }
+
+    public function getSearchSuplier($key, $number, $offset)
+    {
+        $this->db->like('nama_supplier', $key);
+        $this->db->or_like('id', $key);
+        $this->db->or_like('no_faktur', $key);
+        $this->db->order_by("tanggal", "desc");
+        return $this->db->get("restock", $number, $offset);
     }
 
     public function searchProducts($q, $type = "")
@@ -222,7 +241,7 @@ class Products_model extends CI_Model
         $this->db->select("*");
         $this->db->from("products");
         $this->db->order_by("transaction", "desc");
-        $this->db->limit(6);
+        $this->db->limit(4);
         $this->db->where('publish', 1);
         return $this->db->get();
     }

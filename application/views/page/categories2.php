@@ -21,40 +21,10 @@
     <link href="<?= base_url('assets/new/') ?>css/styles.css" media="all" type="text/css" rel="stylesheet" />
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/a11988f544.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="collection-template bg-light">
-    <nav class="produk-bwh navbar-expand-lg navbar-dark bg-dark fixed-bottom p-4 m-0">
-        <div class="container">
-            <a class="text-danger pe-5" href="#">Semua Produk</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul style="height: 60vh; overflow-y: scroll">
-                    <li class="py-3"><a href="#" class="text-white">Populer</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Kudamas Batik</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Kudamas Couture</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Kencana Ungu</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Amro</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Kemala Homewear</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Gamis Daily</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Gamis Syar'i</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Marissa</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Daster Soloan</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Tunik dan Atasan</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Mukena</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Kesehatan</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Sprei, Bantal, Guling</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Baju Anak</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Hijab</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Hawa</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Scarlet</a></li>
-                    <li class="py-3"><a href="#" class="text-white">Masker Kain</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <div id="page">
         <div class="wapper-inner row-offcanvas row-offcanvas-left">
             <header class="header-v6">
@@ -138,12 +108,35 @@
                                     </div>
                                     <!-- .shop-cart -->
                                     <!-- ul.toplinks -->
-                                    <ul class="toplinks">
-                                        <li class="toplink">
-                                            <a href="#">Login</a>
-                                        </li>
-                                        <li class="toplink"><a href="#">Wishlist</a></li>
-                                    </ul>
+                                    <?php if (!$this->session->userdata('login')) { ?>
+                                        <ul class="toplinks">
+                                            <li class="toplink">
+                                                <a href="<?= base_url('login') ?>">Login</a>
+                                            </li>
+                                            <li class="toplink">
+                                                <a href="<?= base_url('register') ?>">Daftar</a>
+                                            </li>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <ul class="toplinks">
+                                            <li class="toplink dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    (<?= $user['name'] ?>)
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" href="<?= base_url('profile') ?>">Profile</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" href="<?= base_url('profile/transaction') ?>">Cek Status Pemesanan</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="toplink nav-item">
+                                                <a class="nav-link" onclick="confirm('Apakah Anda Yakin Ingin Logout?')" href="<?= base_url('logout') ?>">Logout</a>
+                                            </li>
+                                        </ul>
+                                    <?php } ?>
                                     <!-- end right topbar -->
                                 </div>
                             </div>
@@ -196,10 +189,10 @@
                             </div>
                             <!-- end nav -->
 
-                            <form class="form-search" action="#">
-                                <input class="input-search" placeholder="Search" type="text" />
+                            <form class="form-search" method="get" action="<?= base_url(); ?>search">
+                                <input class="input-search" placeholder="Search" type="text" name="q" />
                                 <div class="btn-search">
-                                    <input class="btn-search1" type="submit" value="Search" />
+                                    <button class="btn-search1" type="submit" value="Search" />
                                 </div>
                             </form>
                         </div>
@@ -214,8 +207,8 @@
                     <div class="container">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-transparent p-0 m-0 py-5">
-                                <li class="breadcrumb-item h3"><a href="#" class="text-danger">Home</a></li>
-                                <li class="breadcrumb-item h3 text-dark active" aria-current="page">Produk</li>
+                                <li class="breadcrumb-item h3"><a href="<?= base_url() ?>" class="text-danger">Home</a></li>
+                                <li class="breadcrumb-item h3 text-dark active" aria-current="page">Categories</li>
                             </ol>
                         </nav>
                     </div>
@@ -276,19 +269,7 @@
                                                                         <span class="price">Rp <?= str_replace(",", ".", number_format($p['price'])); ?></span>
                                                                     <?php } ?>
                                                                 </div>
-                                                                <!-- actions -->
-                                                                <div class="actions">
-                                                                    <div class="action add-to-cart">
-                                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"> </a>
-                                                                    </div>
-                                                                    <div class="action add-to-wishlist">
-                                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"> </a>
-                                                                    </div>
-                                                                    <div class="action add-to-quickview">
-                                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview"> </a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end actions -->
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -317,7 +298,7 @@
                                                         <div class="col-sm-8">
                                                             <div class="product-item-details">
                                                                 <div class="product-item-name">
-                                                                    <a href="#" class="product-item-link"> <?= $p['title'] ?> </a>
+                                                                    <a href="<?= base_url('p/' . $p['slug']) ?>" class="product-item-link"> <?= $p['title'] ?> </a>
                                                                 </div>
 
                                                                 <div class="price-box price-final_price">
@@ -339,12 +320,11 @@
 
                                                                 <div class="des-product">
                                                                     <span>
-                                                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
-                                                                        egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                                                                        <?= $p['description'] ?>
                                                                     </span>
                                                                 </div>
                                                                 <!-- actions -->
-                                                                <div class="actions-list">
+                                                                <!-- <div class="actions-list">
                                                                     <div class="tocart">
                                                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"> Add to cart </a>
                                                                     </div>
@@ -354,7 +334,7 @@
                                                                     <div class="action-list toquickview">
                                                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview"> Add to quickview </a>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- end actions -->
                                                             </div>
                                                         </div>
@@ -394,80 +374,42 @@
                                                 <div class="list-items">
                                                     <ul>
                                                         <!-- product item -->
-                                                        <li class="row product-item">
-                                                            <div class="col-6 p-0 product-item-info">
-                                                                <a href="#" class="product-item-photo">
-                                                                    <span class="product-image-container">
-                                                                        <img src="<?= base_url('assets/new/') ?>images/product/tab-product/popula1.jpg" alt="" class="product-image-photo img-fluid" />
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-6 p-0 product-item-details">
-                                                                <div class="product-item-name">
-                                                                    <a href="#" class="product-item-link"> Legging Cathedral </a>
+                                                        <?php foreach ($populer->result_array() as $p) { ?>
+                                                            <li class="row product-item">
+                                                                <div class="col-6 p-0 product-item-info">
+                                                                    <a href="<?= base_url('p/' . $p['slug']) ?>" class="product-item-photo">
+                                                                        <span class="product-image-container">
+                                                                            <img src="<?= base_url('assets/images/product/' . $p['img']) ?>" alt="" class="product-image-photo img-fluid" />
+                                                                        </span>
+                                                                    </a>
                                                                 </div>
-                                                                <div>
-                                                                    <img src="images/product/rating.png" alt="" />
+                                                                <div class="col-6 p-0 product-item-details">
+                                                                    <div class="product-item-name">
+                                                                        <a href="<?= base_url('p/' . $p['slug']) ?>" class="product-item-link"> <?= $p['title'] ?> </a>
+                                                                    </div>
+                                                                    <div>
+                                                                        <img src="<?= base_url('assets/new/') ?>images/product/rating.png" alt="" />
+                                                                    </div>
+                                                                    <div class="price-box">
+                                                                        <span class="price-container">
+                                                                            <?php if ($setting['promo'] == 1) { ?>
+                                                                                <?php if ($p['promo_price'] == 0) { ?>
+                                                                                    <span class="price">Rp <?= str_replace(",", ".", number_format($p['price'])); ?></span>
+                                                                                <?php } else { ?>
+                                                                                    <span class="price"> <strike>Rp <?= str_replace(",", ".", number_format($p['price'])); ?></strike> </span>
+                                                                                    <br>
+                                                                                    <span class="price"> Rp <?= str_replace(",", ".", number_format($p['promo_price'])); ?> </span>
+                                                                                <?php } ?>
+                                                                            <?php } else { ?>
+                                                                                <span class="price">Rp <?= str_replace(",", ".", number_format($p['price'])); ?> </span>
+                                                                            <?php } ?>
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="price-box">
-                                                                    <span class="price-container">
-                                                                        <span class="price"> $ 35.00 </span>
-                                                                        <span class="old-price"> $ 45.00 </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                            </li>
+                                                        <?php } ?>
                                                         <!-- end product item -->
-                                                        <!-- product item -->
-                                                        <li class="row product-item">
-                                                            <div class="col-6 p-0 product-item-info">
-                                                                <a href="#" class="product-item-photo">
-                                                                    <span class="product-image-container">
-                                                                        <img src="images/product/tab-product/popular2.jpg" alt="" class="product-image-photo img-fluid" />
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-6 p-0 product-item-details">
-                                                                <div class="product-item-name">
-                                                                    <a href="#" class="product-item-link"> Legging Cathedral </a>
-                                                                </div>
-                                                                <div>
-                                                                    <img src="images/product/rating.png" alt="" />
-                                                                </div>
-                                                                <div class="price-box">
-                                                                    <span class="price-container">
-                                                                        <span class="price"> $ 35.00 </span>
-                                                                        <span class="old-price"> $ 45.00 </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <!-- end product item -->
-                                                        <!-- product item -->
-                                                        <li class="row product-item">
-                                                            <div class="col-6 p-0 product-item-info">
-                                                                <a href="#" class="product-item-photo">
-                                                                    <span class="product-image-container">
-                                                                        <img src="images/product/tab-product/popular3.jpg" alt="" class="product-image-photo img-fluid" />
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-6 p-0 product-item-details">
-                                                                <div class="product-item-name">
-                                                                    <a href="#" class="product-item-link"> Legging Cathedral </a>
-                                                                </div>
-                                                                <div>
-                                                                    <img src="images/product/rating.png" alt="" />
-                                                                </div>
-                                                                <div class="price-box">
-                                                                    <span class="price-container">
-                                                                        <span class="price"> $ 35.00 </span>
-                                                                        <span class="old-price"> $ 45.00 </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <!-- end product item -->
+
                                                     </ul>
                                                 </div>
                                                 <!-- end list items -->
@@ -494,9 +436,16 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="Subcribe">
-                                            <form action="#">
-                                                <input type="email" class="email" placeholder="Enter your email" />
-                                                <input type="submit" value="Subscribe" class="submit" />
+                                            <form action="<?= base_url(); ?>subscribe-email" method="post">
+                                                <div class="row">
+                                                    <div class="col"><input type="email" class="email" placeholder="Enter your email" /></div>
+                                                    <div class="col">
+                                                        <button type="submit" value="Subscribe" class="btn btn-danger mt-2">Subscribe</button>
+                                                    </div>
+
+
+                                                </div>
+
                                             </form>
                                         </div>
                                     </div>
@@ -504,6 +453,14 @@
                             </div>
                         </div>
                         <!--Main-footer-->
+                        <?php
+
+                        $categoriesLimit = $this->Categories_model->getCategoriesLimit();
+                        $setting = $this->Settings_model->getSetting();
+                        $sosmed = $this->Settings_model->getSosmed();
+                        $footerhelp = $this->Settings_model->getFooterHelp();
+                        $footerinfo = $this->Settings_model->getFooterInfo();
+                        $rekening = $this->db->get('rekening'); ?> ?>
                         <div class="main-footer">
                             <div class="footer-widget">
                                 <div class="container">
@@ -515,26 +472,16 @@
                                                 </div>
                                                 <div class="f-content-widget">
                                                     <div class="text-widget">
-                                                        <p class="address"><strong>[ Address ]</strong> 121 King Street, Melboure, victoria 3000 Australia.</p>
-                                                        <p class="hotline"><strong>[ Hotline ]</strong> 070-7782-9137 - <strong>[ Fax ]</strong> 070-7782-9137 - <strong>[ Email ]</strong> contact@mautica.com</p>
+                                                        <p class="address"><strong>[ Alamat ]</strong> <?= $setting['address']; ?>.</p>
+                                                        <p class="hotline"><strong>[ Whatsapp ]</strong> <?= $this->Settings_model->general()["whatsapp"]; ?> </p>
                                                     </div>
                                                     <div class="social">
                                                         <ul>
-                                                            <li>
-                                                                <a href="#">twitter<i class="fa fa-twitter"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">pinterrest<i class="fa fa-pinterest"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">facebook<i class="fa fa-facebook-square"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">behance<i class="fa fa-behance"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">dribbble<i class="fa fa-dribbble"></i></a>
-                                                            </li>
+                                                            <?php foreach ($sosmed->result_array() as $s) { ?>
+                                                                <li>
+                                                                    <a href="<?= $s['link']; ?>"><?= $s['name']; ?><i class="fab fa-<?= $s['icon']; ?>"></i></a>
+                                                                </li>
+                                                            <?php } ?>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -543,28 +490,24 @@
                                         <div class="col-md-3 col-sm-3">
                                             <div class="policy">
                                                 <h3 class="title-widget">
-                                                    <a href="#">Policy & Provision</a>
+                                                    <a href="#">Kategori</a>
                                                 </h3>
                                                 <ul>
-                                                    <li><a href="#">Payment Method</a></li>
-                                                    <li><a href="#">Delivery</a></li>
-                                                    <li><a href="#">Warranty Policy</a></li>
-                                                    <li><a href="#">Returns and Refunds</a></li>
-                                                    <li><a href="#">Information Security</a></li>
+                                                    <?php foreach ($categories->result_array() as $c) { ?>
+                                                        <li><a href="<?= base_url('c/' . $c['slug']) ?>"><?= $c['name'] ?></a></li>
+                                                    <?php } ?>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-3">
                                             <div class="services">
                                                 <h3 class="title-widget">
-                                                    <a href="#">Customer Services</a>
+                                                    <a href="#">Bantuan</a>
                                                 </h3>
                                                 <ul>
-                                                    <li><a href="#">My Account</a></li>
-                                                    <li><a href="#">FAQ</a></li>
-                                                    <li><a href="#">Store System</a></li>
-                                                    <li><a href="#">Tracking</a></li>
-                                                    <li><a href="#">Contact US</a></li>
+                                                    <?php foreach ($footerhelp->result_array() as $f) { ?>
+                                                        <li><a href="<?= base_url() . $f['link']; ?>"><?= $f['title'] ?></a></li>
+                                                    <?php } ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -597,164 +540,50 @@
                 <!--menu off canvas  -->
                 <div id="engo-off-canvas" class="engo-off-canvas sidebar-offcanvas hidden-lg hidden-md">
                     <div class="engo-off-canvas-body">
-                        <div class="offcanvas-head bg-primary">
+                        <div class="offcanvas-head bg-dark">
                             <span>Menu</span>
                         </div>
                         <nav class="navbar navbar-offcanvas navbar-static" data-role="navigation">
                             <div class="navbar-collapse navbar-offcanvas-collapse toggle-dropdown-menu">
-                                <ul id="main-menu-offcanvas" class="nav navbar-nav">
-                                    <li id="menu-item-90"><a href="#">Men</a></li>
-                                    <li id="menu-item-91" class="lever0 item-toggle-dropdown has-sub">
-                                        <a href="#">Women</a>
-                                        <div class="item-toggle-menu">
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">MEN’S WEAR</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop.html">Shirts &amp; Tops</a></li>
-                                                        <li><a href="shop.html">Dresses</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                        <li><a href="shop.html">Suite</a></li>
-                                                        <li><a href="shop.html">Jeans</a></li>
-                                                        <li><a href="shop.html">Shoes</a></li>
-                                                        <li><a href="shop.html">Sweaters</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                    </ul>
+                                <ul id="main-menu-offcanvas" class="nav navbar-nav text-dark">
+                                    <?php foreach ($menu->result_array() as $m) { ?>
+                                        <?php
+                                        if (substr($m['link'], 0, 4) == "http" || substr($m['link'], 0, 3) == "www") {
+                                            $newlink1 = $m['link'];
+                                        } else {
+                                            $newlink1 = base_url() . $m['link'];
+                                        }
+                                        ?>
+                                        <?php if ($this->Settings_model->getSubMenu($m['id'])->num_rows() > 0) { ?>
+                                            <li id="menu-item-89" class="lever0 item-toggle-dropdown has-sub">
+                                                <a class="text-dark" href="#"><?= $m['title'] ?></a>
+                                                <div class="item-toggle-menu">
+                                                    <div class="widget-menu">
+                                                        <ul>
+                                                            <?php foreach ($this->Settings_model->getSubMenu($m['id'])->result_array() as $cat) { ?>
+                                                                <?php
+                                                                if (substr($cat['link'], 0, 4) == "http" || substr($cat['link'], 0, 3) == "www") {
+                                                                    $newlink = $cat['link'];
+                                                                } else {
+                                                                    $newlink = base_url() . $cat['link'];
+                                                                }
+                                                                ?>
+
+                                                                <li><a class="text-dark" href="<?= $newlink; ?>"><?= $cat['name']; ?></a></li>
+
+                                                            <?php } ?>
+
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">WOMEN’S WEAR</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop.html">Party Dress</a></li>
-                                                        <li><a href="shop.html">T - Shirt</a></li>
-                                                        <li><a href="shop.html">Jean &amp; Trousers</a></li>
-                                                        <li><a href="shop.html">Jacket &amp; Coats</a></li>
-                                                        <li><a href="shop.html">Sweaters</a></li>
-                                                        <li><a href="shop.html">Blouses</a></li>
-                                                        <li><a href="shop.html">Sports &amp; Lifestyle</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">ACCESSORIES</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop.html">Leather</a></li>
-                                                        <li><a href="shop.html">Sunglasses</a></li>
-                                                        <li><a href="shop.html">Belts</a></li>
-                                                        <li><a href="shop.html">Ring</a></li>
-                                                        <li><a href="shop.html">Sweaters</a></li>
-                                                        <li><a href="shop.html">Sassuawear</a></li>
-                                                        <li><a href="shop.html">Bag &amp; Persess</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="menu-item-88" class="menu-item-88 level-0"><a href="#">Kids</a></li>
-                                    <li id="menu-item-87" class="menu-item-87 level-0"><a href="#">Shoes</a></li>
-                                    <li id="menu-item-86" class="menu-item-86 level-0"><a href="#">Bags</a></li>
-                                    <li id="menu-item-85" class="lever0 item-toggle-dropdown has-sub">
-                                        <a href="#">Pages</a>
-                                        <div class="item-toggle-menu">
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Homepages</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="index.html">Home page style 1</a></li>
-                                                        <li><a href="index2.html">Home page style 2</a></li>
-                                                        <li><a href="index3.html">Home page style 3</a></li>
-                                                        <li><a href="index4.html">Home page style 4</a></li>
-                                                        <li><a href="index5.html">Home page style 5</a></li>
-                                                        <li><a href="index6.html">Home page style 6</a></li>
-                                                        <li><a href="index7.html">Home page style 7</a></li>
-                                                        <li><a href="index8.html">Home page style 8</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Templates</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="404.html"> Page not found</a></li>
-                                                        <li><a href="about.html">About </a></li>
-                                                        <li><a href="about-v2">About v2 </a></li>
-                                                        <li><a href="cart.html"> Cart</a></li>
-                                                        <li><a href="faq.html">faq</a></li>
-                                                        <li><a href="contact.html">Contact </a></li>
-                                                        <li><a href="contact-v2.html">Contact v2 </a></li>
-                                                        <li><a href="login-register.html"> Login & Register</a></li>
-                                                        <li><a href="menu-v1-white.html" title="">Menu v1 white</a></li>
-                                                        <li><a href="menu-v2-black.html" title="">Menu v2 black</a></li>
-                                                        <li><a href="menu-v2-white.html" title="">Menu v2 white</a></li>
-                                                        <li><a href="menu-v3-black" title="">Menu v3 black</a></li>
-                                                        <li><a href="menu-v3-white" title="">Menu v3 White</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Shop teamplate</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop-grid-full-screen.html">Shop grid full screen v1</a></li>
-                                                        <li><a href="shop-grid-full-screen-v2.html">Shop grid full screen v2</a></li>
-                                                        <li><a href="shop-grid-full-width.html">Shop grid full width v1</a></li>
-                                                        <li><a href="shop-grid-full-width-v1.html">Shop grid full width v2</a></li>
-                                                        <li><a href="shop-list-right-sidebar.html">Shop list right sidebar v1</a></li>
-                                                        <li><a href="shop-list-right-sidebar-v2.html">Shop list right sidebar v2</a></li>
-                                                        <li><a href="shop-list-left-sidebar.html">Shop list left sidebar v1</a></li>
-                                                        <li><a href="shop-list-left-sidebar-v2.html">Shop list left sidebar v2</a></li>
-                                                        <li><a href="quickview.html" title="">Quick view</a></li>
-                                                        <li><a href="wishlist.html" title="">Wishlist</a></li>
-                                                        <li><a href="checkout.html" title="">Check out</a></li>
-                                                        <li><a href="product.html" title="">Product detail</a></li>
-                                                        <li><a href="product-v2.html" title="">Product detail v2</a></li>
-                                                        <li><a href="odercomplete.html" title="">Oder complete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Shop teamplate</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop-grid-3col-left-sidebar.html">Shop grid 3 col LeftSidebar v1</a></li>
-                                                        <li><a href="shop-grid-3col-left-sidebar-v2.html">Shop grid 3 col LeftSidebar v2</a></li>
-                                                        <li><a href="shop-grid-3col-right-sidebar.html">Shop grid 3 col RightSidebar v1</a></li>
-                                                        <li><a href="shop-grid-3col-right-sidebar-v2.html">Shop grid 3 col RightSidebar v2</a></li>
-                                                        <li><a href="shop-grid-fullwidth.html">Shop grid Fullwidth v1</a></li>
-                                                        <li><a href="shop-grid-fullwidth-v2.html">Shop grid 3 col Fullwidth v2</a></li>
-                                                        <li><a href="shop-grid-2col-left-sidebar.html">Shop grid 2 col LeftSidebar v1</a></li>
-                                                        <li><a href="shop-grid-2col-left-sidebar-v2.html">Shop grid 2 col LeftSidebar v2</a></li>
-                                                        <li><a href="shop-grid-2col-right-sidebar.html">Shop grid 2 col RightSidebar v1</a></li>
-                                                        <li><a href="shop-grid-2col-left-sidebar-v2.html">Shop grid 2 col RightSidebar v2</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="menu-item-89" class="lever0 item-toggle-dropdown has-sub">
-                                        <a href="#">Blog</a>
-                                        <div class="item-toggle-menu">
-                                            <div class="widget-menu">
-                                                <ul>
-                                                    <li><a href="blog-v4.html">Blog version 4</a></li>
-                                                    <li><a href="blog-v3-3col.html">Blog version 3 - 3 col</a></li>
-                                                    <li><a href="blog-v3-2col">Blog version 3 - 2 col</a></li>
-                                                    <li><a href="blog-v2-right.html">Blog version 2 - Right</a></li>
-                                                    <li><a href="blog-v2-left.html">Blog version 2 - Left</a></li>
-                                                    <li><a href="blog-v1-right-sidebar.html">Blog version 1 - Right Sidebar</a></li>
-                                                    <li><a href="blog-v1-left-sidebar.html">Blog version 1 - Left Sidebar</a></li>
-                                                    <li><a href="single-post-v2.html">Single Post - Left Sidebar</a></li>
-                                                    <li><a href="single-post-right-sidebar.html">Single Post - Right Sidebar</a></li>
-                                                    <li><a href="single-post">Single Post - Fullwidth</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="menu-item-115" class="menu-item-115 level-0"><a href="#">Contact</a></li>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li>
+                                            <li id="menu-item-90"><a class="text-dark" href="<?= $newlink1 ?>"><?= $m['title'] ?></a></li>
+                                            </li>
+                                        <?php } ?>
+
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </nav>
@@ -769,6 +598,7 @@
         <!--END PAGE FOOTER -->
     </div>
     <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="<?= base_url('assets/new/') ?>js/plugin/plugin.js"></script>
     <script src="<?= base_url('assets/new/') ?>js/owl.carousel-2.js"></script>
@@ -782,6 +612,33 @@
         $(function() {
             engoPriceSlider();
         });
+    </script>
+    <script>
+        function addCart() {
+            $.ajax({
+                url: "<?= base_url(); ?>cart/add_to_cart",
+                type: "post",
+                data: {
+                    id: <?= $p['productId']; ?>,
+                    qty: 1
+                },
+                success: function(data) {
+                    $(".navbar-cart-inform").html(`<i class="fa fa-shopping-cart"></i> Keranjang(<?= count($this->cart->contents()) + 1; ?>)`);
+                    swal({
+                            title: "Berhasil Ditambah ke Keranjang",
+                            text: `<?= $product['title']; ?>`,
+                            icon: "success",
+                            buttons: true,
+                            buttons: ["Lanjut Belanja", "Lihat Keranjang"],
+                        })
+                        .then((cart) => {
+                            if (cart) {
+                                location.href = "<?= base_url(); ?>cart"
+                            }
+                        });
+                },
+            })
+        }
     </script>
 </body>
 

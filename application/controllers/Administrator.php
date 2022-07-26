@@ -592,6 +592,244 @@ class Administrator extends CI_Controller
         $this->load->view('templates/footer_admin');
     }
 
+    public function suplier()
+    {
+        $data['title'] = 'Pembelian - Suplier Panel';
+        $config['base_url'] = base_url() . 'administrator/suplier/';
+        $config['total_rows'] = $this->Products_model->getProducts("", "")->num_rows();
+        $config['per_page'] = 10;
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+        $from = $this->uri->segment(3);
+        $this->pagination->initialize($config);
+        $data['getRestock'] = $this->Products_model->getRestock($config['per_page'], $from);
+        $this->load->view('templates/header_admin', $data);
+        $this->load->view('administrator/suplier', $data);
+        $this->load->view('templates/footer_admin');
+    }
+    public function search_suplier()
+    {
+        $key = $_GET['q'];
+        $data['title'] = 'Restock Suplier - Admin Panel';
+        $config['base_url'] = base_url() . 'administrator/suplier/';
+        $config['total_rows'] = $this->Products_model->getSearchSuplier($key, "", "")->num_rows();
+        $config['per_page'] = 10;
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+        $from = $this->uri->segment(3);
+        $this->pagination->initialize($config);
+        $data['getRestock'] = $this->Products_model->getSearchSuplier($key, $config['per_page'], $from);
+        $data['search'] = $key;
+        $this->load->view('templates/header_admin', $data);
+        $this->load->view('administrator/suplier', $data);
+        $this->load->view('templates/footer_admin');
+    }
+
+    public function add_suplier()
+    {
+        $this->form_validation->set_rules('nama', 'nama', 'required', ['required' => 'Nama wajib diisi']);
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tambah Restock Suplier - Admin Panel';
+            $this->load->view('templates/header_admin', $data);
+            $this->load->view('administrator/add_suplier', $data);
+            $this->load->view('templates/footer_admin');
+        } else {
+            $data = [
+                'no_faktur' => $this->input->post('noFaktur'),
+                'nama_supplier' => $this->input->post('nama'),
+                'tanggal' => date('Y-m-d H:i:s')
+            ];
+            if ($this->db->insert('restock', $data)) {
+                $this->session->set_flashdata('upload', "<script>
+                    swal({
+                    text: 'Data Restock Suplier berhasil ditambahkan',
+                    icon: 'success'
+                    });
+                    </script>");
+                redirect(base_url() . 'administrator/suplier');
+            } else {
+                $this->session->set_flashdata('failed', "<div class='alert alert-danger' role='alert'>
+                Gagal menambah Restock Suplier, pastikan data sudah benar.
+              </div>");
+                redirect(base_url() . 'administrator/suplier/add');
+            }
+        }
+    }
+    public function edit_suplier($id)
+    {
+        $this->form_validation->set_rules('nama', 'nama', 'required', ['required' => 'Nama wajib diisi']);
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Edit Suplier - Admin Panel';
+            $data['suplier'] = $this->db->get_where('restock', array('no_faktur' => $this->uri->segment(3)))->row_array();
+            $this->load->view('templates/header_admin', $data);
+            $this->load->view('administrator/edit_suplier', $data);
+            $this->load->view('templates/footer_admin');
+        } else {
+            $data = [
+                'nama_supplier' => $this->input->post('nama'),
+            ];
+
+            if ($this->db->update('restock', $data, array('no_faktur' => $this->input->post('noFaktur')))) {
+                $this->session->set_flashdata('upload', "<script>
+                        swal({
+                        text: 'Produk berhasil diubah',
+                        icon: 'success'
+                        });
+                        </script>");
+                redirect(base_url() . 'administrator/suplier');
+            } else {
+                $this->session->set_flashdata('failed', "<div class='alert alert-danger' role='alert'>
+                    Gagal mengubah suplier,Silakan ulangi lagi.
+                </div>");
+                redirect(base_url() . 'administrator/suplier/' . $this->input->post('noFaktur') . '/edit');
+            }
+        }
+    }
+    public function delete_suplier($id)
+    {
+        $this->db->where('no_faktur', $id);
+        $this->db->delete('restock');
+
+        $this->db->where('no_faktur', $id);
+        $this->db->delete('detail_restock');
+        $this->session->set_flashdata('upload', "<script>
+            swal({
+            text: 'Suplier berhasil dihapus',
+            icon: 'success'
+            });
+            </script>");
+        redirect(base_url() . 'administrator/suplier');
+    }
+
+    public function detailsuplier($where)
+    {
+        $data['title'] = 'Detail - Suplier Panel';
+        $config['base_url'] = base_url() . 'administrator/detailsuplier/';
+        $config['total_rows'] = $this->Products_model->getProducts("", "")->num_rows();
+        $config['per_page'] = 10;
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+        $from = $this->uri->segment(4);
+        $this->pagination->initialize($config);
+        $data['getDetailRestock'] = $this->Products_model->getDetailRestock($where, $config['per_page'], $from);
+        $this->load->view('templates/header_admin', $data);
+        $this->load->view('administrator/detailsuplier', $data);
+        $this->load->view('templates/footer_admin');
+    }
+    public function add_detailsuplier()
+    {
+        $this->form_validation->set_rules('namaproduk', 'namaproduk', 'required', ['required' => 'Nama wajib diisi']);
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tambah Detail Restock Suplier - Admin Panel';
+            $this->load->view('templates/header_admin', $data);
+            $this->load->view('administrator/add_detailsuplier', $data);
+            $this->load->view('templates/footer_admin');
+        } else {
+            $data = [
+                'no_faktur' => $this->input->post('noFaktur'),
+                'nama_produk' => $this->input->post('namaproduk'),
+                'qty' => $this->input->post('qty'),
+                'harga' => $this->input->post('harga')
+            ];
+            if ($this->db->insert('detail_restock', $data)) {
+                $this->session->set_flashdata('upload', "<script>
+                    swal({
+                    text: 'Data Detail Restock Suplier berhasil ditambahkan',
+                    icon: 'success'
+                    });
+                    </script>");
+                redirect(base_url() . 'administrator/detailsuplier/' . $this->input->post('noFaktur'));
+            } else {
+                $this->session->set_flashdata('failed', "<div class='alert alert-danger' role='alert'>
+                Gagal menambah Restock Suplier, pastikan data sudah benar.
+              </div>");
+                redirect(base_url() . 'administrator/detailsuplier/' . $this->input->post('noFaktur') . '/add');
+            }
+        }
+    }
+
+    public function edit_detailsuplier($id)
+    {
+        $this->form_validation->set_rules('namaproduk', 'namaproduk', 'required', ['required' => 'Nama wajib diisi']);
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Edit Suplier - Admin Panel';
+            $data['detailSuplier'] = $this->db->get_where('detail_restock', array('id' => $this->uri->segment(3)))->row_array();
+            $this->load->view('templates/header_admin', $data);
+            $this->load->view('administrator/edit_detailsuplier', $data);
+            $this->load->view('templates/footer_admin');
+        } else {
+            $data = [
+                'no_faktur' => $this->input->post('noFaktur'),
+                'nama_produk' => $this->input->post('namaproduk'),
+                'qty' => $this->input->post('qty'),
+                'harga' => $this->input->post('harga')
+            ];
+
+            if ($this->db->update('detail_restock', $data, array('id' => $id))) {
+                $this->session->set_flashdata('upload', "<script>
+                        swal({
+                        text: 'Produk berhasil diubah',
+                        icon: 'success'
+                        });
+                        </script>");
+                redirect(base_url() . 'administrator/suplier');
+            } else {
+                $this->session->set_flashdata('failed', "<div class='alert alert-danger' role='alert'>
+                    Gagal mengubah suplier,Silakan ulangi lagi.
+                </div>");
+                redirect(base_url() . 'administrator/suplier/' . $this->input->post('noFaktur') . '/edit');
+            }
+        }
+    }
+
     public function search_products()
     {
         $key = $_GET['q'];

@@ -143,6 +143,12 @@ $setting = $this->db->get('settings')->row_array();
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>administrator/suplier">
+          <i class="fas fa-fw fa-box-open"></i>
+          <span>Pembelian Suplier</span></a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>administrator/promo">
           <i class="fas fa-fw fa-fire"></i>
           <span>Promo</span></a>

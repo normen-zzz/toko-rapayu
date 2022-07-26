@@ -92,14 +92,35 @@
                          </div>
                          <!-- .shop-cart -->
                          <!-- ul.toplinks -->
-                         <ul class="toplinks">
-                             <li class="toplink">
-                                 <a href="<?= base_url('login') ?>">Login</a>
-                             </li>
-                             <li class="toplink">
-                                 <a href="<?= base_url('register') ?>">Daftar</a>
-                             </li>
-                         </ul>
+                         <?php if (!$this->session->userdata('login')) { ?>
+                             <ul class="toplinks">
+                                 <li class="toplink">
+                                     <a href="<?= base_url('login') ?>">Login</a>
+                                 </li>
+                                 <li class="toplink">
+                                     <a href="<?= base_url('register') ?>">Daftar</a>
+                                 </li>
+                             </ul>
+                         <?php } else { ?>
+                             <ul class="toplinks">
+                                 <li class="toplink dropdown">
+                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                         (<?= $user['name'] ?>)
+                                     </a>
+                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                         <li>
+                                             <a class="dropdown-item text-dark" href="<?= base_url('profile') ?>">Profile</a>
+                                         </li>
+                                         <li>
+                                             <a class="dropdown-item text-dark" href="<?= base_url('profile/transaction') ?>">Cek Status Pemesanan</a>
+                                         </li>
+                                     </ul>
+                                 </li>
+                                 <li class="toplink nav-item">
+                                     <a class="nav-link" onclick="confirm('Apakah Anda Yakin Ingin Logout?')" href="<?= base_url('logout') ?>">Logout</a>
+                                 </li>
+                             </ul>
+                         <?php } ?>
                          <!-- end right topbar -->
                      </div>
                  </div>
@@ -156,10 +177,10 @@
                  </div>
                  <!-- end nav -->
 
-                 <form class="form-search" action="#">
-                     <input class="input-search" placeholder="Search" type="text" />
+                 <form class="form-search" method="get" action="<?= base_url(); ?>search">
+                     <input class="input-search" placeholder="Search" type="text" name="q" />
                      <div class="btn-search">
-                         <input class="btn-search1" type="submit" value="Search" />
+                         <button class="btn-search1" type="submit" value="Search" />
                      </div>
                  </form>
              </div>

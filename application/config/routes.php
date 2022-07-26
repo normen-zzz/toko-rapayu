@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$route['default_controller'] = 'home/login';
+$route['default_controller'] = 'home';
 $route['404_override'] = 'home/notfound';
 $route['translate_uri_dashes'] = FALSE;
 $route['404'] = 'home/notfound';
@@ -66,4 +66,9 @@ $route['administrator/setting/delivery/(:num)'] = 'administrator/edit_delivery_s
 $route['administrator/setting/cod'] = 'administrator/cod_setting';
 $route['administrator/setting/cod/add'] = 'administrator/add_cod_setting';
 $route['administrator/setting/footer'] = 'administrator/footer_setting';
+$route['administrator/suplier/add'] = 'administrator/add_suplier';
+$route['administrator/suplier/search'] = 'administrator/search_suplier';
+$route['administrator/detailsuplier/(:any)/add'] = 'administrator/add_detailsuplier';
+$route['administrator/suplier/(:num)/edit'] = 'administrator/edit_suplier/$1';
+$route['administrator/detailsuplier/(:num)/edit'] = 'administrator/edit_detailsuplier/$1';
 $route['(:any)'] = 'page/index/$1';

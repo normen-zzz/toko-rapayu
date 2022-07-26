@@ -198,22 +198,7 @@
                                                                     <?php } ?>
                                                                 </span>
                                                             </div>
-                                                            <!-- actions -->
-                                                            <div class="actions">
-                                                                <div class="action add-to-cart">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="action add-to-wishlist">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="action add-to-quickview">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- end actions -->
+
                                                         </div>
                                                     </div>
                                                 </div>

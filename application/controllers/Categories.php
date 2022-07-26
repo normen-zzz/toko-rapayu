@@ -75,6 +75,9 @@ class Categories extends CI_Controller
 		$data['nameCat'] = $this->Categories_model->getNameCategoryBySlug($c);
 		$data['categories'] = $this->Categories_model->getCategories();
 		$data['cart'] = $this->Order_model->getCartUser();
+		$data['populer'] = $this->Products_model->getBestProductsLimit();
+		$data['setting'] = $this->Settings_model->getSetting();
+		$data['user'] =  $this->db->get_where('user', array('id' => $this->session->userdata('id')))->row_array();
 		// $this->load->view('templates/header', $data);
 		// $this->load->view('templates/navbar');
 		$this->load->view('page/categories2', $data);

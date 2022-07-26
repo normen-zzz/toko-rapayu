@@ -4,8 +4,8 @@
 <head>
 	<title>Masuk</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Produk By Mfikri.com">
-	<meta name="author" content="M Fikri Setiadi">
+	<meta name="description" content="Produk By inculture">
+	<meta name="author" content="inculture">
 	<!-- Bootstrap -->
 	<link href="<?php echo base_url() . 'assets/css/bootstrap.min.css' ?>" rel="stylesheet">
 	<!-- styles -->

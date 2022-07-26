@@ -68,10 +68,8 @@
                                     <!--  -->
                                     <!-- .logo -->
                                     <div class="logo text-center">
-                                        <a class="logo" title="Magento Commerce" href="#">
-                                            <h1 class="display-1 text-white" style="font-family: 'Lora'">
-                                                <?= $this->Settings_model->general()["app_name"]; ?>
-                                            </h1>
+                                        <a class="logo" title="Magento Commerce" href="<?= base_url() ?>">
+                                            <h1 class="display-1 text-white" style="font-family: 'Lora'"><?= $this->Settings_model->general()["app_name"]; ?></h1>
                                         </a>
                                     </div>
                                     <!-- end .logo -->
@@ -110,9 +108,6 @@
                                                                         <del>Rp. <?= $item['price'] ?></del>
                                                                     </div>
                                                                     <span class="qty"> QTY: <?= $item['qty'] ?> </span>
-                                                                    <br>
-                                                                    <?php $cartVariant = $this->db->get_where('variant', array('id' => $item['id_variant']))->row_array() ?>
-                                                                    <span class="qty"> Variant: <?= $cartVariant['name'] ?> </span>
                                                                 </div>
                                                                 <a href="<?= base_url('Cart/delete/' . $item['id']) ?>" class="remove" title="Remove this item"><i class="fa fa-times-circle"></i></a>
                                                             </div>
@@ -124,7 +119,8 @@
                                                 <div class="total-minicart">
                                                     <p class="total"><strong>Subtotal:</strong> <span class="amount"><?= $totalall; ?></span></p>
                                                     <p class="buttons clearfix">
-                                                        <a href="<?= base_url(); ?>cart" class="btn btn-primary pull-right checkout btn-minicart">Checkout</a>
+                                                        <a href="#" class="btn pull-left btn-minicart">View Cart</a>
+                                                        <a href="#" class="btn btn-primary pull-right checkout btn-minicart">Checkout</a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -137,10 +133,11 @@
                                                 <li class="toplink">
                                                     <a href="<?= base_url('login') ?>">Login</a>
                                                 </li>
-                                                <li class="toplink"><a href="<?= base_url('register') ?>">Daftar</a></li>
+                                                <li class="toplink">
+                                                    <a href="<?= base_url('register') ?>">Daftar</a>
+                                                </li>
                                             </ul>
                                         <?php } else { ?>
-                                            <!-- end right topbar -->
                                             <ul class="toplinks">
                                                 <li class="toplink dropdown">
                                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -156,10 +153,11 @@
                                                     </ul>
                                                 </li>
                                                 <li class="toplink nav-item">
-                                                    <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
+                                                    <a class="nav-link" onclick="confirm('Apakah Anda Yakin Ingin Logout?')" href="<?= base_url('logout') ?>">Logout</a>
                                                 </li>
                                             </ul>
                                         <?php } ?>
+                                        <!-- end right topbar -->
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +212,7 @@
                                 <form class="form-search" method="get" action="<?= base_url(); ?>search">
                                     <input class="input-search" placeholder="Search" type="text" name="q" />
                                     <div class="btn-search">
-                                        <button class="btn-search1" type="submit" value="Search">
+                                        <button class="btn-search1" type="submit" value="Search" />
                                     </div>
                                 </form>
                             </div>
@@ -445,7 +443,6 @@
                 <!-- PAGE FOOTER -->
                 <!-- PAGE FOOTER -->
                 <footer class="site-footer footer-v3">
-                    <?php $setting = $this->db->get('settings')->row_array(); ?>
                     <!-- footer content -->
                     <div class="footer">
                         <div class="head-footer">
@@ -557,277 +554,53 @@
                     </div>
                     <!-- end footer content -->
                 </footer>
-                <!--END PAGE FOOTER -->
                 <!--menu off canvas  -->
                 <div id="engo-off-canvas" class="engo-off-canvas sidebar-offcanvas hidden-lg hidden-md">
                     <div class="engo-off-canvas-body">
-                        <div class="offcanvas-head bg-primary">
+                        <div class="offcanvas-head bg-dark">
                             <span>Menu</span>
                         </div>
                         <nav class="navbar navbar-offcanvas navbar-static" data-role="navigation">
                             <div class="navbar-collapse navbar-offcanvas-collapse toggle-dropdown-menu">
-                                <ul id="main-menu-offcanvas" class="nav navbar-nav">
-                                    <li id="menu-item-90"><a href="#">Men</a></li>
-                                    <li id="menu-item-91" class="lever0 item-toggle-dropdown has-sub">
-                                        <a href="#">Women</a>
-                                        <div class="item-toggle-menu">
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">MEN’S WEAR</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop.html">Shirts &amp; Tops</a></li>
-                                                        <li><a href="shop.html">Dresses</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                        <li><a href="shop.html">Suite</a></li>
-                                                        <li><a href="shop.html">Jeans</a></li>
-                                                        <li><a href="shop.html">Shoes</a></li>
-                                                        <li><a href="shop.html">Sweaters</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                    </ul>
+                                <ul id="main-menu-offcanvas" class="nav navbar-nav text-dark">
+                                    <?php foreach ($menu->result_array() as $m) { ?>
+                                        <?php
+                                        if (substr($m['link'], 0, 4) == "http" || substr($m['link'], 0, 3) == "www") {
+                                            $newlink1 = $m['link'];
+                                        } else {
+                                            $newlink1 = base_url() . $m['link'];
+                                        }
+                                        ?>
+                                        <?php if ($this->Settings_model->getSubMenu($m['id'])->num_rows() > 0) { ?>
+                                            <li id="menu-item-89" class="lever0 item-toggle-dropdown has-sub">
+                                                <a class="text-dark" href="#"><?= $m['title'] ?></a>
+                                                <div class="item-toggle-menu">
+                                                    <div class="widget-menu">
+                                                        <ul>
+                                                            <?php foreach ($this->Settings_model->getSubMenu($m['id'])->result_array() as $cat) { ?>
+                                                                <?php
+                                                                if (substr($cat['link'], 0, 4) == "http" || substr($cat['link'], 0, 3) == "www") {
+                                                                    $newlink = $cat['link'];
+                                                                } else {
+                                                                    $newlink = base_url() . $cat['link'];
+                                                                }
+                                                                ?>
+
+                                                                <li><a class="text-dark" href="<?= $newlink; ?>"><?= $cat['name']; ?></a></li>
+
+                                                            <?php } ?>
+
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">WOMEN’S WEAR</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop.html">Party Dress</a></li>
-                                                        <li><a href="shop.html">T - Shirt</a></li>
-                                                        <li>
-                                                            <a href="shop.html">Jean &amp; Trousers</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Jacket &amp; Coats</a>
-                                                        </li>
-                                                        <li><a href="shop.html">Sweaters</a></li>
-                                                        <li><a href="shop.html">Blouses</a></li>
-                                                        <li>
-                                                            <a href="shop.html">Sports &amp; Lifestyle</a>
-                                                        </li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">ACCESSORIES</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="shop.html">Leather</a></li>
-                                                        <li><a href="shop.html">Sunglasses</a></li>
-                                                        <li><a href="shop.html">Belts</a></li>
-                                                        <li><a href="shop.html">Ring</a></li>
-                                                        <li><a href="shop.html">Sweaters</a></li>
-                                                        <li><a href="shop.html">Sassuawear</a></li>
-                                                        <li><a href="shop.html">Bag &amp; Persess</a></li>
-                                                        <li><a href="shop.html">Swimwear</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="menu-item-88" class="menu-item-88 level-0">
-                                        <a href="#">Kids</a>
-                                    </li>
-                                    <li id="menu-item-87" class="menu-item-87 level-0">
-                                        <a href="#">Shoes</a>
-                                    </li>
-                                    <li id="menu-item-86" class="menu-item-86 level-0">
-                                        <a href="#">Bags</a>
-                                    </li>
-                                    <li id="menu-item-85" class="lever0 item-toggle-dropdown has-sub">
-                                        <a href="#">Pages</a>
-                                        <div class="item-toggle-menu">
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Homepages</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="index.html">Home page style 1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index2.html">Home page style 2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index3.html">Home page style 3</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index4.html">Home page style 4</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index5.html">Home page style 5</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index6.html">Home page style 6</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index7.html">Home page style 7</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index8.html">Home page style 8</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Templates</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li><a href="404.html"> Page not found</a></li>
-                                                        <li><a href="about.html">About </a></li>
-                                                        <li><a href="about-v2">About v2 </a></li>
-                                                        <li><a href="cart.html"> Cart</a></li>
-                                                        <li><a href="faq.html">faq</a></li>
-                                                        <li><a href="contact.html">Contact </a></li>
-                                                        <li><a href="contact-v2.html">Contact v2 </a></li>
-                                                        <li>
-                                                            <a href="login-register.html">
-                                                                Login & Register</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="menu-v1-white.html" title="">Menu v1 white</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="menu-v2-black.html" title="">Menu v2 black</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="menu-v2-white.html" title="">Menu v2 white</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="menu-v3-black" title="">Menu v3 black</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="menu-v3-white" title="">Menu v3 White</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Shop teamplate</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-grid-full-screen.html">Shop grid full screen v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-full-screen-v2.html">Shop grid full screen v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-full-width.html">Shop grid full width v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-full-width-v1.html">Shop grid full width v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right-sidebar.html">Shop list right sidebar v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right-sidebar-v2.html">Shop list right sidebar v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left-sidebar.html">Shop list left sidebar v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left-sidebar-v2.html">Shop list left sidebar v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="quickview.html" title="">Quick view</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="wishlist.html" title="">Wishlist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html" title="">Check out</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="product.html" title="">Product detail</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="product-v2.html" title="">Product detail v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="odercomplete.html" title="">Oder complete</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="widget-menu">
-                                                <h3 class="menu-title">Shop teamplate</h3>
-                                                <div class="widget-menu-detail">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-grid-3col-left-sidebar.html">Shop grid 3 col LeftSidebar v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-3col-left-sidebar-v2.html">Shop grid 3 col LeftSidebar v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-3col-right-sidebar.html">Shop grid 3 col RightSidebar v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-3col-right-sidebar-v2.html">Shop grid 3 col RightSidebar v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-fullwidth.html">Shop grid Fullwidth v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-fullwidth-v2.html">Shop grid 3 col Fullwidth v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-2col-left-sidebar.html">Shop grid 2 col LeftSidebar v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-2col-left-sidebar-v2.html">Shop grid 2 col LeftSidebar v2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-2col-right-sidebar.html">Shop grid 2 col RightSidebar v1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-2col-left-sidebar-v2.html">Shop grid 2 col RightSidebar v2</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="menu-item-89" class="lever0 item-toggle-dropdown has-sub">
-                                        <a href="#">Blog</a>
-                                        <div class="item-toggle-menu">
-                                            <div class="widget-menu">
-                                                <ul>
-                                                    <li><a href="blog-v4.html">Blog version 4</a></li>
-                                                    <li>
-                                                        <a href="blog-v3-3col.html">Blog version 3 - 3 col</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-v3-2col">Blog version 3 - 2 col</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-v2-right.html">Blog version 2 - Right</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-v2-left.html">Blog version 2 - Left</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-v1-right-sidebar.html">Blog version 1 - Right Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-v1-left-sidebar.html">Blog version 1 - Left Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-post-v2.html">Single Post - Left Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-post-right-sidebar.html">Single Post - Right Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-post">Single Post - Fullwidth</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li id="menu-item-115" class="menu-item-115 level-0">
-                                        <a href="#">Contact</a>
-                                    </li>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li>
+                                            <li id="menu-item-90"><a class="text-dark" href="<?= $newlink1 ?>"><?= $m['title'] ?></a></li>
+                                            </li>
+                                        <?php } ?>
+
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </nav>

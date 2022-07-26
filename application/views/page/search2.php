@@ -168,7 +168,7 @@
                                         ?>
                                         <?php if ($this->Settings_model->getSubMenu($m['id'])->num_rows() > 0) { ?>
                                             <li>
-                                                <a href="#" title=""><?= $m['title'] ?></a>
+                                                <a href="<?= base_url($m['link']) ?>" title=""><?= $m['title'] ?></a>
                                                 <ul class="sub-menu">
                                                     <?php foreach ($this->Settings_model->getSubMenu($m['id'])->result_array() as $cat) { ?>
                                                         <?php

@@ -69,11 +69,16 @@ class Products extends CI_Controller
 		}
 		$data['title'] = 'Semua Produk - ' . $this->Settings_model->general()["app_name"];
 		$data['css'] = 'products';
+		$data['categories'] = $this->Categories_model->getCategories();
+		$data['cart'] = $this->Order_model->getCartUser();
+		$data['populer'] = $this->Products_model->getBestProductsLimit();
+		$data['setting'] = $this->Settings_model->getSetting();
+		$data['user'] =  $this->db->get_where('user', array('id' => $this->session->userdata('id')))->row_array();
 		$data['responsive'] = 'product-responsive';
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/navbar');
+		// $this->load->view('templates/header', $data);
+		// $this->load->view('templates/navbar');
 		$this->load->view('page/products', $data);
-		$this->load->view('templates/footerv2');
+		// $this->load->view('templates/footerv2');
 	}
 
 	public function detail_product($slug)
